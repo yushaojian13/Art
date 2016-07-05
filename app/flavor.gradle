@@ -1,0 +1,9 @@
+android {
+    productFlavors {
+        huawei {
+        }
+
+        ali {
+        }
+    }
+}

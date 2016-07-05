@@ -1,0 +1,25 @@
+def releaseTime() {
+    return new Date().format("yyyyMMdd-HH:mm:ss", TimeZone.getDefault())
+}
+
+android {
+    android.applicationVariants.all { variant ->
+        def appName
+        // Check if an applicationName property is supplied; if not use the name of the parent project.
+        if (project.hasProperty("applicationName")) {
+            appName = applicationName
+        } else {
+            appName = parent.name
+        }
+
+        variant.outputs.each { output ->
+            def targetName = variant.productFlavors.get(0).name
+            def versionName = variant.versionName
+            def buildType = variant.buildType.name
+            def fileName = "${appName}_${targetName}_${versionName}_${buildType}_${releaseTime()}.apk"
+            def outputDir = OUT_DIR + "/" + targetName + "/" + versionName
+
+            output.outputFile = new File(outputDir, fileName)
+        }
+    }
+}
