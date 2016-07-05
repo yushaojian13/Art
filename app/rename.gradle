@@ -17,9 +17,8 @@ android {
             def versionName = variant.versionName
             def buildType = variant.buildType.name
             def fileName = "${appName}_${targetName}_${versionName}_${buildType}_${releaseTime()}.apk"
-            def outputDir = OUT_DIR + "/" + targetName + "/" + versionName
 
-            output.outputFile = new File(outputDir, fileName)
+            output.outputFile = new File(buildDir.parent + "/../apk/" + targetName + "/" + versionName, fileName)
         }
     }
 }
