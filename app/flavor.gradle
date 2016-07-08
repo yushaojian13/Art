@@ -1,9 +1,11 @@
 android {
     productFlavors {
         huawei {
+            applicationId "com.ysj.art.huawei"
         }
 
         ali {
+            applicationId "com.ysj.art.ali"
         }
     }
 }
