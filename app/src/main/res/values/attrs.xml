@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--设置比例图片-->
+    <declare-styleable name="RatioImageView">
+        <attr name="image_ratio" format="float"/>
+    </declare-styleable>
+</resources>
