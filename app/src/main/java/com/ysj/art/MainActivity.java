@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.ysj.art.meizhi.MeizhiFragment;
 import com.ysj.art.meizhi.MeizhiPresenter;
+import com.ysj.log.L;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,8 +14,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MeizhiFragment meizhiFragment = new MeizhiFragment();
-        getFragmentManager().beginTransaction().add(R.id.contentFrame, meizhiFragment).commit();
+        MeizhiFragment meizhiFragment = (MeizhiFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
+        if (meizhiFragment == null) {
+            meizhiFragment = new MeizhiFragment();
+            getFragmentManager().beginTransaction().add(R.id.contentFrame, meizhiFragment).commit();
+        }
 
         new MeizhiPresenter(meizhiFragment);
     }
