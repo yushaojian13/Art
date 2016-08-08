@@ -21,4 +21,13 @@ public class Meizhi {
 
         return 1.0f * width / height;
     }
+
+    @Override
+    public String toString() {
+        return "Meizhi{" +
+                "url='" + url + '\'' +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }

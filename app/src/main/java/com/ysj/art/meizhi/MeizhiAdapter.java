@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ysj.art.R;
 import com.ysj.art.widgets.RatioImageView;
+import com.ysj.log.L;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class MeizhiAdapter extends RecyclerView.Adapter<MeizhiAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Meizhi meizhi = mMeizhis.get(position);
+        L.d(meizhi);
 
         holder.meizhiIV.setRatio(meizhi.getRatio());
         Glide.with(holder.meizhiIV.getContext()).load(meizhi.url).diskCacheStrategy(DiskCacheStrategy.SOURCE).dontAnimate().into(holder.meizhiIV);
