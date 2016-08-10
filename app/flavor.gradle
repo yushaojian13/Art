@@ -1,10 +1,23 @@
 android {
     productFlavors {
+
+        flavorDimensions("product", "channel")
+
+        Art {
+            dimension "product"
+        }
+
+        Gank {
+            dimension "product"
+        }
+
         huawei {
+            dimension "channel"
             applicationId "com.ysj.art.huawei"
         }
 
         ali {
+            dimension "channel"
             applicationId "com.ysj.art.ali"
         }
     }

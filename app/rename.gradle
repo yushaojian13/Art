@@ -4,20 +4,13 @@ def releaseTime() {
 
 android {
     android.applicationVariants.all { variant ->
-        def appName
-        // Check if an applicationName property is supplied; if not use the name of the parent project.
-        if (project.hasProperty("applicationName")) {
-            appName = applicationName
-        } else {
-            appName = parent.name
-        }
-
         variant.outputs.each { output ->
-            def targetName = variant.productFlavors.get(0).name
+            def productName = variant.productFlavors.get(0).name // flavor维度1的名字
+            def channelName = variant.productFlavors.get(1).name // flavor维度2的名字
             def versionName = variant.versionName
             def buildType = variant.buildType.name
-            def fileName = "${appName}_${targetName}_${versionName}_${buildType}_${releaseTime()}.apk"
-            def outputDir = buildDir.parent + "/../apk/" + targetName + "/" + versionName
+            def fileName = "${productName}_${channelName}_${versionName}_${buildType}_${releaseTime()}.apk"
+            def outputDir = buildDir.parent + "/../apk/" + productName + "/" + channelName + "/" + versionName
 
             if (buildType == 'release') {
                 output.outputFile = new File(outputDir, fileName)
