@@ -1,7 +1,7 @@
 android {
     productFlavors {
 
-        flavorDimensions("product", "channel")
+        flavorDimensions "product", "channel"
 
         Art {
             dimension "product"
