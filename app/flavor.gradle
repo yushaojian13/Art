@@ -13,12 +13,12 @@ android {
 
         huawei {
             dimension "channel"
-            applicationId "com.ysj.art.huawei"
+            applicationIdSuffix ".huawei"
         }
 
         ali {
             dimension "channel"
-            applicationId "com.ysj.art.ali"
+            applicationIdSuffix ".ali"
         }
     }
 }
