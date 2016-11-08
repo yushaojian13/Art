@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Art</string>
+    <string name="install_shortcut">Install Shortcut</string>
+    <string name="uninstall_shortcut">Uninstall Shortcut</string>
 </resources>
