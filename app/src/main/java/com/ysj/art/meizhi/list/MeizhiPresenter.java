@@ -26,12 +26,23 @@ public class MeizhiPresenter implements MeizhiContract.Presenter {
 
     @Override
     public void start() {
-        refresh();
+        refresh(false);
     }
 
     @Override
-    public void refresh() {
-        mMeizhiView.setRefreshingIndicator(true);
+    public void refresh(boolean forceUpdate) {
+        // Simplification for sample: a network reload will be forced on first load.
+        refresh(forceUpdate, true);
+    }
+
+    private void refresh(boolean forceUpdate, final boolean showLoadingUI) {
+        if (showLoadingUI) {
+            mMeizhiView.setRefreshingIndicator(true);
+        }
+
+        if (forceUpdate) {
+            mMeizhisRepository.refreshMeizhis();
+        }
 
         mMeizhisRepository.getLatestMeizhis(new MeizhisDataSource.LoadMeizhisCallback() {
 

@@ -32,14 +32,24 @@ import okhttp3.Response;
  */
 
 public class MeizhisRemoteDataSource implements MeizhisDataSource {
-    private Context      mContext;
 
-    private OkHttpClient client  = new OkHttpClient();
+    private static MeizhisRemoteDataSource INSTANCE;
 
-    private Handler      handler = new Handler();
+    private Context mContext;
 
-    public MeizhisRemoteDataSource(@NonNull Context context) {
+    private OkHttpClient client = new OkHttpClient();
+
+    private Handler handler = new Handler();
+
+    private MeizhisRemoteDataSource(@NonNull Context context) {
         mContext = context;
+    }
+
+    public static MeizhisRemoteDataSource getInstance(@NonNull Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new MeizhisRemoteDataSource(context);
+        }
+        return INSTANCE;
     }
 
     @Override
@@ -96,5 +106,26 @@ public class MeizhisRemoteDataSource implements MeizhisDataSource {
                 });
             }
         });
+    }
+
+    @Override
+    public void saveMeizhi(@NonNull Meizhi meizhi) {
+        // not supported.
+    }
+
+    @Override
+    public void saveMeizhis(@NonNull List<Meizhi> meizhis) {
+        // not supported.
+    }
+
+    @Override
+    public void refreshMeizhis() {
+        // Not required because the {@link MeizhisRepository} handles the logic of refreshing the
+        // tasks from all the available data sources.
+    }
+
+    @Override
+    public void deleteAllMeizhis() {
+        // not supported.
     }
 }

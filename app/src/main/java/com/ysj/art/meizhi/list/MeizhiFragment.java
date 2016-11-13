@@ -26,10 +26,10 @@ public class MeizhiFragment extends Fragment implements MeizhiContract.View, Swi
 
     private MeizhiContract.Presenter mPresenter;
 
-    private SwipeRefreshLayout       mRefreshLayout;
-    private RecyclerView             mMeizhiRV;
+    private SwipeRefreshLayout mRefreshLayout;
+    private RecyclerView       mMeizhiRV;
 
-    private MeizhiAdapter            mMeizhiAdapter;
+    private MeizhiAdapter mMeizhiAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class MeizhiFragment extends Fragment implements MeizhiContract.View, Swi
 
     @Override
     public void onRefresh() {
-        mPresenter.refresh();
+        mPresenter.refresh(false);
     }
 
     @Override

@@ -31,7 +31,7 @@ public interface MeizhiContract {
 
     interface Presenter extends BasePresenter {
 
-        void refresh();
+        void refresh(boolean forceUpdate);
 
         void loadMore();
 

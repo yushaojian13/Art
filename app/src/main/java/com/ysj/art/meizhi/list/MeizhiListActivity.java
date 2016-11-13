@@ -25,8 +25,8 @@ public class MeizhiListActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.contentFrame, meizhiFragment).commit();
         }
 
-        new MeizhiPresenter(MeizhisRepository.getInstance(new MeizhisLocalDataSource(getApplicationContext()),
-                                                          new MeizhisRemoteDataSource(getApplicationContext())),
+        new MeizhiPresenter(MeizhisRepository.getInstance(MeizhisLocalDataSource.getInstance(getApplicationContext()),
+                                                          MeizhisRemoteDataSource.getInstance(getApplicationContext())),
                             meizhiFragment);
     }
 }

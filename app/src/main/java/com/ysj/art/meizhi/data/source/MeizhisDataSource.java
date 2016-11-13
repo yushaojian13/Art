@@ -22,4 +22,12 @@ public interface MeizhisDataSource {
 
     void getLatestMeizhis(@NonNull LoadMeizhisCallback callback);
 
+    void saveMeizhi(@NonNull Meizhi meizhi);
+
+    void saveMeizhis(@NonNull List<Meizhi> meizhis);
+
+    void refreshMeizhis();
+
+    void deleteAllMeizhis();
+
 }
