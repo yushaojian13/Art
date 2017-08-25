@@ -55,11 +55,20 @@ public class MainActivity extends BaseActivity {
 //                                                                        PendingIntent.FLAG_UPDATE_CURRENT);
 //        builder.setContentIntent(resultPendingIntent);
 
-        Intent firstIntent = new Intent(this, MainActivity.class); // 如果点击通知时MainActivity在任务堆栈中，则点击通知时MainActivity会destroy，不论其launchMode为何，也不论其是否在前台
-        Intent secondIntent = new Intent(this, ResultActivity.class);
+//        Intent firstIntent = new Intent(this, MainActivity.class); // 如果点击通知时MainActivity在任务堆栈中，则点击通知时MainActivity会destroy，不论其launchMode为何，也不论其是否在前台
+//        Intent secondIntent = new Intent(this, ResultActivity.class);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//        stackBuilder.addNextIntent(firstIntent);
+//        stackBuilder.addNextIntent(secondIntent);
+//        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(resultPendingIntent);
+
+        Intent resultIntent = new Intent(this, ResultActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntent(firstIntent);
-        stackBuilder.addNextIntent(secondIntent);
+        // ResultActivity退出时，返回ResultActivity的父Activity。需要在Manifest中指定，否则不生效
+        // 如果点击通知时父Activity（MainActivity）在任务堆栈中，则点击通知时父Activity（MainActivity）会destroy，不论其launchMode为何，也不论其是否在前台
+        stackBuilder.addParentStack(ResultActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
