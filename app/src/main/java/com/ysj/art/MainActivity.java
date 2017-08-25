@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
 //        builder.setContentIntent(resultPendingIntent);
 
         // 可以指定打开两个Activity：点击通知时打开数组中的最后一个，然后在它退出后打开前一个
-        Intent firstIntent = new Intent(this, MainActivity.class);
+        Intent firstIntent = new Intent(this, MainActivity.class); // 如果MainActivity在Manifest中指定launchMode为singleTask，则如果点击通知时MainActivity在前台，会在调用ResultActivity的onCreate之前会连续调用MainActivity的onPause、onResume和onPause
         Intent secondIntent = new Intent(this, ResultActivity.class);
         PendingIntent resultPendingIntent = PendingIntent.getActivities(this, REQUEST_CODE,
                                                                         new Intent[] { firstIntent, secondIntent },
