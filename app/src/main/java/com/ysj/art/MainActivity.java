@@ -2,7 +2,9 @@ package com.ysj.art;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.View;
 public class MainActivity extends BaseActivity {
 
     private static final int NOTIFICATION_ID = 100;
+    private static final int REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,12 @@ public class MainActivity extends BaseActivity {
                 .setContentTitle(getString(R.string.app_name))
                 .setContentText("Hello World!");
         // @formatter:on
+
+        // 指定一个操作：点击通知时打开ResultActivity。
+        // 虽然通知操作是可选的，但至少应向通知添加一个操作。
+        Intent resultIntent = new Intent(this, ResultActivity.class);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(resultPendingIntent);
 
         // 2. 构建通知。Builder模式的构建部分
         Notification notification = builder.build();
