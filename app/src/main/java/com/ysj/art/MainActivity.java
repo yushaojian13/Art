@@ -42,8 +42,16 @@ public class MainActivity extends BaseActivity {
 
         // 指定一个操作：点击通知时打开ResultActivity。
         // 虽然通知操作是可选的，但至少应向通知添加一个操作。
-        Intent resultIntent = new Intent(this, ResultActivity.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent resultIntent = new Intent(this, ResultActivity.class);
+//        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, REQUEST_CODE, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(resultPendingIntent);
+
+        // 可以指定打开两个Activity：点击通知时打开数组中的最后一个，然后在它退出后打开前一个
+        Intent firstIntent = new Intent(this, MainActivity.class);
+        Intent secondIntent = new Intent(this, ResultActivity.class);
+        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, REQUEST_CODE,
+                                                                        new Intent[] { firstIntent, secondIntent },
+                                                                        PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
         // 2. 构建通知。Builder模式的构建部分
