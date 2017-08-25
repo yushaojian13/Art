@@ -1,9 +1,8 @@
 package com.ysj.art;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
