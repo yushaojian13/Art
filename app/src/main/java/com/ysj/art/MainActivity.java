@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.os.Bundle;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.View;
 
 public class MainActivity extends BaseActivity {
@@ -47,14 +48,22 @@ public class MainActivity extends BaseActivity {
 //        builder.setContentIntent(resultPendingIntent);
 
         // 可以指定打开两个Activity：点击通知时打开数组中的最后一个，然后在它退出后打开前一个
-        Intent firstIntent = new Intent(this, MainActivity.class); // 如果MainActivity在Manifest中指定launchMode为singleTask，则如果点击通知时MainActivity在前台，会在调用ResultActivity的onCreate之前会连续调用MainActivity的onPause、onResume和onPause
+//        Intent firstIntent = new Intent(this, MainActivity.class); // 如果MainActivity在Manifest中指定launchMode为singleTask，则如果点击通知时MainActivity在前台，会在调用ResultActivity的onCreate之前会连续调用MainActivity的onPause、onResume和onPause
+//        Intent secondIntent = new Intent(this, ResultActivity.class);
+//        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, REQUEST_CODE,
+//                                                                        new Intent[] { firstIntent, secondIntent },
+//                                                                        PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(resultPendingIntent);
+
+        Intent firstIntent = new Intent(this, MainActivity.class); // 如果点击通知时MainActivity在任务堆栈中，则点击通知时MainActivity会destroy，不论其launchMode为何，也不论其是否在前台
         Intent secondIntent = new Intent(this, ResultActivity.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, REQUEST_CODE,
-                                                                        new Intent[] { firstIntent, secondIntent },
-                                                                        PendingIntent.FLAG_UPDATE_CURRENT);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntent(firstIntent);
+        stackBuilder.addNextIntent(secondIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
-        // 2. 构建通知。Builder模式的构建部分
+                // 2. 构建通知。Builder模式的构建部分
         Notification notification = builder.build();
 
         // 3. 发送通知。一个通知对应一个id，后续可以通过该id更新或取消对应的通知
